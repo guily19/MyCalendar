@@ -24,13 +24,14 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Calendar c = Calendar.getInstance();
-        int number = c.get(Calendar.DAY_OF_MONTH);
-        int weekPos = c.get(Calendar.DAY_OF_WEEK);
+        //int number = c.get(Calendar.DAY_OF_MONTH);
+        //int weekPos = c.get(Calendar.DAY_OF_WEEK);
         tl = new TableLayout(getApplicationContext());
 
         super.onCreate(savedInstanceState);
-        getWeekFromToday();
-        //fillWeekTable(tl,number,weekPos);
+        String [] days = getWeekFromToday();
+
+        fillWeekTable(tl,days);
         setContentView(R.layout.activity_main);
     }
 
@@ -53,9 +54,8 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    private void fillWeekTable(TableLayout tl, int number, int weekPos){
+    private void fillWeekTable(TableLayout tl, String[] days){
         tl = (TableLayout)findViewById(R.id.tableLayout);
-        String[] days = getWeekFromToday();
         for(int i = 0; i < days.length; ++i){
             View child = tl.getChildAt(i);
             if (child instanceof TableRow) {
@@ -66,20 +66,6 @@ public class MainActivity extends ActionBarActivity {
                 }
             }
         }
-        /*
-        for (int i = 0; i < tl.getChildCount(); i++) {
-            View child = tl.getChildAt(i);
-            Log.d(TAG,"num row = "+i);
-            if (child instanceof TableRow) {
-                TableRow row = (TableRow) child;
-
-                for (int x = 0; x < row.getChildCount(); x++) {
-                    View view = row.getChildAt(x);
-                    view.setEnabled(false);
-                }
-            }
-        }
-        */
     }
 
     @Override
