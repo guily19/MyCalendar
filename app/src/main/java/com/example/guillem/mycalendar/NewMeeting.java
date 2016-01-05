@@ -113,6 +113,7 @@ public class NewMeeting extends Activity {
 
 
     public void saveNewEvent(View view){
+        Log.d(TAG,"Anem a guardar un meeting");
         // Comprovar que totes les dades insertades son correctes
         if(descEditText.getText().length() != 0){
             // Guardar dades a la base de dades
@@ -122,7 +123,9 @@ public class NewMeeting extends Activity {
             String hEnd = timeEndView.getText().toString();
             if(db != null){
                 try {
-                    db.execSQL("INSERT INTO Meetings(day,startTime,endTime,description) VALUES ('"+date+"','"+hourIni+"','"+hourEnd+"','"+desc+"')");
+                    String query = "INSERT INTO Meetings(day,startTime,endTime,description) VALUES ('"+date+"','"+hourIni+"','"+hourEnd+"','"+desc+"')";
+                    Log.d(TAG,query);
+                    db.execSQL(query);
                     db.close();
                     // Tornem a mostrar la setmana
                     Intent intent = new Intent(this, MainActivity.class);

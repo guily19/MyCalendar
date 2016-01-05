@@ -4,10 +4,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -16,10 +20,13 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -30,6 +37,7 @@ public class MainActivity extends Activity {
 
     private CalendarDbHelper cdbh = new CalendarDbHelper(this,"MeetingsDB",null,1);
     private SQLiteDatabase db;
+    private Calendar myCalendar;
 
     // *TextView
     private TextView textViewServiceApp;
@@ -106,6 +114,9 @@ public class MainActivity extends Activity {
         db = cdbh.getReadableDatabase();
         setContentView(R.layout.activity_main);
 
+        //Start Calendar
+        myCalendar = Calendar.getInstance();
+
         textViewPrevDate = (TextView) findViewById(R.id.textViewPrevDate);
         textViewDate = (TextView) findViewById(R.id.textViewDate);
         textViewNextDate = (TextView) findViewById(R.id.textViewNextDate);
@@ -154,7 +165,7 @@ public class MainActivity extends Activity {
         firstDayOfWeek = CommonMethod.convertWeekDays(NextPreWeekday[0]);
         lastDayOfWeek = CommonMethod.convertWeekDays(NextPreWeekday[6]);
 
-        textViewDate.setText(firstDayOfWeek+" - "+lastDayOfWeek);
+        textViewDate.setText("Setmana del "+firstDayOfWeek+" - "+lastDayOfWeek);
 
         textViewSun.setText(CommonMethod.convertWeekDays(NextPreWeekday[0])
                 + "\nDg");
@@ -191,9 +202,88 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
+    public void selectWeek(View view){
+
+        Log.d(TAG,"textViewDate clicked!");
+        new DatePickerDialog(this, date, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+    }
+
+    private void updateLabel() {
+
+        String myFormat = "dd/MM/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        textViewDate.setText(sdf.format(myCalendar.getTime()));
+    }
+
+    private void updateWeekView(Calendar cal){
+        NextPreWeekday = getWeekOfDay(cal);
+        firstDayOfWeek = CommonMethod.convertWeekDays(NextPreWeekday[0]);
+        lastDayOfWeek = CommonMethod.convertWeekDays(NextPreWeekday[6]);
+
+        textViewDate.setText("Setmana del "+firstDayOfWeek+" - "+lastDayOfWeek);
+
+        textViewSun.setText(CommonMethod.convertWeekDays(NextPreWeekday[0])
+                + "\nDg");
+        textViewMon.setText(CommonMethod.convertWeekDays(NextPreWeekday[1])
+                + "\nDl");
+        textViewTue.setText(CommonMethod.convertWeekDays(NextPreWeekday[2])
+                + "\nDm");
+        textViewWed.setText(CommonMethod.convertWeekDays(NextPreWeekday[3])
+                + "\nDc");
+        textViewThu.setText(CommonMethod.convertWeekDays(NextPreWeekday[4])
+                + "\nDj");
+        textViewFri.setText(CommonMethod.convertWeekDays(NextPreWeekday[5])
+                + "\nDv");
+        textViewSat.setText(CommonMethod.convertWeekDays(NextPreWeekday[6])
+                + "\nDs");
+        try
+        {
+            Log.d(TAG,"Dins el try");
+            new LoadViewsInToWeekView().execute("");
+        } catch (Exception e)
+        {
+            Log.d(TAG,"Dins el catch");
+            Log.getStackTraceString(e);
+        }
+    }
+
+    DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            // TODO Auto-generated method stub
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, monthOfYear);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateWeekView(myCalendar);
+            updateLabel();
+        }
+
+    };
+
     public String[] getWeekDay() {
 
         Calendar now = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String[] days = new String[7];
+        int delta = -now.get(GregorianCalendar.DAY_OF_WEEK)+1;
+        now.add(Calendar.DAY_OF_MONTH, delta);
+        for (int i = 0; i < 7; i++) {
+            days[i] = format.format(now.getTime());
+            now.add(Calendar.DAY_OF_MONTH, 1);
+        }
+
+        return days;
+
+    }
+
+    public String[] getWeekOfDay(Calendar cal) {
+
+        Calendar now = cal;
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String[] days = new String[7];
         int delta = -now.get(GregorianCalendar.DAY_OF_WEEK)+1;
@@ -452,24 +542,30 @@ public class MainActivity extends Activity {
 
     }
 
+
     public class LoadViewsInToWeekView extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... params) {
             try {
                 //Fem les crides necessaries a la BD (una per dia)
-
+                Log.d(TAG,"Anem a fer les queries pertinents per la setmana");
                 weekDatas = new ArrayList<WeekSets>();
                 for(int i = 0; i < NextPreWeekday.length; ++i){
-                    Cursor c = db.query(false,"Meetings",null,"'day'="+NextPreWeekday[i],null,null,null,null,null);
+                    String formatedData = formatData(NextPreWeekday[i]);
+                    Log.d(TAG,"Busquem els meetings del dia ="+formatedData);
+                    Cursor c = db.query(false, "Meetings", null, "day='" + formatedData + "'", null, null, null, null, null);
                     if(c.moveToFirst()){
-                        int hIni = c.getInt(c.getColumnIndexOrThrow("startTime"));
-                        int hEnd = c.getInt(c.getColumnIndexOrThrow("endTime"));
-                        String description = c.getString(c.getColumnIndexOrThrow("description"));
-                        tapMargin = getWithAndHigthToButton(hIni);
-                        buttonHight = getHightOfButton(hIni, hEnd);
-                        weekDatas.add(getWeekValues(String.valueOf(i),"12",description,tapMargin,buttonHight));
-
+                        do {
+                            int hIni = c.getInt(c.getColumnIndexOrThrow("startTime"));
+                            int hEnd = c.getInt(c.getColumnIndexOrThrow("endTime"));
+                            Log.d(TAG,"hIni = "+Integer.toString(hIni));
+                            Log.d(TAG,"hEnd = "+Integer.toString(hEnd));
+                            String description = c.getString(c.getColumnIndexOrThrow("description"));
+                            tapMargin = getWithAndHigthToButton(hIni);
+                            buttonHight = getHightOfButton(hIni, hEnd);
+                            weekDatas.add(getWeekValues(String.valueOf(i),"12",description,tapMargin,buttonHight));
+                        } while (c.moveToNext());
                     }
                 }
 
@@ -520,11 +616,32 @@ public class MainActivity extends Activity {
             return null;
         }
 
+        private String formatData(String dataOrg){
+            String [] parts = dataOrg.split("-");
+            if(parts[2].indexOf('0') == 0){
+                StringBuilder sb = new StringBuilder(parts[2]);
+                sb.deleteCharAt(0);
+                parts[2] = sb.toString();
+            }
+            if(parts[1].indexOf('0') == 0){
+                StringBuilder sb1 = new StringBuilder(parts[1]);
+                sb1.deleteCharAt(0);
+                parts[1] = sb1.toString();
+            }
+            return parts[2]+"/"+parts[1]+"/"+parts[0];
+        }
+
         @Override
         protected void onPostExecute(String str) {
 
             try {
-
+                relativeLayoutSunday.removeAllViews();
+                relativeLayoutMonDay.removeAllViews();
+                relativeLayoutTueDay.removeAllViews();
+                relativeLayoutWedDay.removeAllViews();
+                relativeLayoutThuDay.removeAllViews();
+                relativeLayoutFriDay.removeAllViews();
+                relativeLayoutSatDay.removeAllViews();
                 WeekSets weekToDay;
                 int length = weekDatas.size();
                 Log.i("length===>", String.valueOf(length));

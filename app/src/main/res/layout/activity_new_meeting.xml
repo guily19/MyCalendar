@@ -10,14 +10,42 @@
     tools:context=".MainActivity" >
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Descripció:"/>
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Nova Reunió"
+        android:id="@+id/textView5"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Descripció:"
+        android:id="@+id/textView6" />
 
     <EditText
         android:id="@+id/descEditText"
         android:layout_width="match_parent"
         android:layout_height="60dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Dia:"
+        android:id="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/button1"
+        android:layout_below="@+id/textView2"
+        android:text="@string/date_selected"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_gravity="center_horizontal" />
 
     <Button
         android:id="@+id/button1"
@@ -27,57 +55,86 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="7dp"
         android:onClick="setDate"
-        android:text="Dia de la reunio" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/button1"
-        android:layout_below="@+id/textView2"
-        android:text="@string/date_selected"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:text="Prem per canviar el dia" />
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <NumberPicker
-            android:id="@+id/hourPickerIni"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"  />
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Hora d&apos;inici:"
+                android:id="@+id/textView" />
+
+            <NumberPicker
+                android:id="@+id/hourPickerIni"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_horizontal" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Hora de finalització:"
+                android:id="@+id/textView4" />
+
+            <NumberPicker
+                android:id="@+id/hourPickerEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_horizontal" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/textView2"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignRight="@+id/button1"
             android:layout_below="@+id/textView1"
             android:text="@string/date_selected"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <NumberPicker
-            android:id="@+id/hourPickerEnd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"  />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_gravity="center_vertical" />
 
         <TextView
             android:id="@+id/textView3"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignRight="@+id/button1"
             android:layout_below="@+id/textView2"
             android:text="@string/date_selected"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_gravity="center_vertical" />
+
     </LinearLayout>
 
 
