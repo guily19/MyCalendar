@@ -6,7 +6,9 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
@@ -38,6 +40,8 @@ public class MainActivity extends Activity {
     private CalendarDbHelper cdbh = new CalendarDbHelper(this,"MeetingsDB",null,1);
     private SQLiteDatabase db;
     private Calendar myCalendar;
+
+    private Map<String,String> maper;
 
     // *TextView
     private TextView textViewServiceApp;
@@ -114,6 +118,9 @@ public class MainActivity extends Activity {
         db = cdbh.getReadableDatabase();
         setContentView(R.layout.activity_main);
 
+
+        maper = new HashMap<>();
+
         //Start Calendar
         myCalendar = Calendar.getInstance();
 
@@ -169,18 +176,25 @@ public class MainActivity extends Activity {
 
         textViewMon.setText(CommonMethod.convertWeekDays(NextPreWeekday[0])
                 + "\nDl");
+        maper.put(CommonMethod.convertWeekDays(NextPreWeekday[0]) + "\nDl", NextPreWeekday[0].toString());
         textViewTue.setText(CommonMethod.convertWeekDays(NextPreWeekday[1])
                 + "\nDm");
+        maper.put(CommonMethod.convertWeekDays(NextPreWeekday[1]) + "\nDm", NextPreWeekday[1].toString());
         textViewWed.setText(CommonMethod.convertWeekDays(NextPreWeekday[2])
                 + "\nDc");
+        maper.put(CommonMethod.convertWeekDays(NextPreWeekday[2]) + "\nDc", NextPreWeekday[2].toString());
         textViewThu.setText(CommonMethod.convertWeekDays(NextPreWeekday[3])
                 + "\nDj");
+        maper.put(CommonMethod.convertWeekDays(NextPreWeekday[3]) + "\nDj", NextPreWeekday[3].toString());
         textViewFri.setText(CommonMethod.convertWeekDays(NextPreWeekday[4])
                 + "\nDv");
+        maper.put(CommonMethod.convertWeekDays(NextPreWeekday[4]) + "\nDv", NextPreWeekday[4].toString());
         textViewSat.setText(CommonMethod.convertWeekDays(NextPreWeekday[5])
                 + "\nDs");
+        maper.put(CommonMethod.convertWeekDays(NextPreWeekday[5]) + "\nDs", NextPreWeekday[5].toString());
         textViewSun.setText(CommonMethod.convertWeekDays(NextPreWeekday[6])
                 + "\nDg");
+        maper.put(CommonMethod.convertWeekDays(NextPreWeekday[6]) + "\nDg", NextPreWeekday[6].toString());
 
         try
         {
@@ -208,6 +222,12 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
+    public void openHelp(View view){
+        Log.d(TAG,"Add new event clicked");
+        Intent intent = new Intent(this, HelpActivity.class);
+        startActivity(intent);
+    }
+
     public void selectWeek(View view){
 
         Log.d(TAG,"textViewDate clicked!");
@@ -216,13 +236,13 @@ public class MainActivity extends Activity {
                 myCalendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
-    private void updateLabel() {
-
-        String myFormat = "dd/MM/yy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
-        textViewDate.setText(sdf.format(myCalendar.getTime()));
-    }
+//    private void updateLabel() {
+//
+//        String myFormat = "dd/MM/yy"; //In which you need put here
+//        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+//
+//        textViewDate.setText(sdf.format(myCalendar.getTime()));
+//    }
 
     private void updateWeekView(Calendar cal){
         NextPreWeekday = getWeekOfDay(cal);
@@ -233,18 +253,25 @@ public class MainActivity extends Activity {
 
         textViewMon.setText(CommonMethod.convertWeekDays(NextPreWeekday[0])
                 + "\nDl");
+        maper.put(CommonMethod.convertWeekDays(NextPreWeekday[0]) + "\nDl", NextPreWeekday[0].toString());
         textViewTue.setText(CommonMethod.convertWeekDays(NextPreWeekday[1])
                 + "\nDm");
+        maper.put(CommonMethod.convertWeekDays(NextPreWeekday[1]) + "\nDm", NextPreWeekday[1].toString());
         textViewWed.setText(CommonMethod.convertWeekDays(NextPreWeekday[2])
                 + "\nDc");
+        maper.put(CommonMethod.convertWeekDays(NextPreWeekday[2]) + "\nDc", NextPreWeekday[2].toString());
         textViewThu.setText(CommonMethod.convertWeekDays(NextPreWeekday[3])
                 + "\nDj");
+        maper.put(CommonMethod.convertWeekDays(NextPreWeekday[3]) + "\nDj", NextPreWeekday[3].toString());
         textViewFri.setText(CommonMethod.convertWeekDays(NextPreWeekday[4])
                 + "\nDv");
+        maper.put(CommonMethod.convertWeekDays(NextPreWeekday[4]) + "\nDv", NextPreWeekday[4].toString());
         textViewSat.setText(CommonMethod.convertWeekDays(NextPreWeekday[5])
                 + "\nDs");
+        maper.put(CommonMethod.convertWeekDays(NextPreWeekday[5]) + "\nDs", NextPreWeekday[5].toString());
         textViewSun.setText(CommonMethod.convertWeekDays(NextPreWeekday[6])
                 + "\nDg");
+        maper.put(CommonMethod.convertWeekDays(NextPreWeekday[6]) + "\nDg", NextPreWeekday[6].toString());
         try
         {
             Log.d(TAG,"Dins el try");
@@ -266,7 +293,7 @@ public class MainActivity extends Activity {
             myCalendar.set(Calendar.MONTH, monthOfYear);
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             updateWeekView(myCalendar);
-            updateLabel();
+
         }
 
     };
@@ -296,7 +323,10 @@ public class MainActivity extends Activity {
         now.add(Calendar.DAY_OF_MONTH, delta);
         for (int i = 0; i < 7; i++) {
             days[i] = format.format(now.getTime());
+            String[] parts = days[i].toString().split("-");
+            String part = parts[2];
             now.add(Calendar.DAY_OF_MONTH, 1);
+            maper.put(part, days[i].toString());
         }
 
         return days;
@@ -451,10 +481,21 @@ public class MainActivity extends Activity {
     }
 
     public void showTasks(View view) {
-        Log.d(TAG,"Add new event clicked");
+        Log.d(TAG, "Add new event clicked");
         Intent intent = new Intent(this, ListTasks.class);
         startActivity(intent);
     }
+
+    public void changeViewToDay(View view) {
+        Log.d(TAG,"Add new event clicked");
+        TextView t = (TextView)view;
+        String day = t.getText().toString();
+        Intent intent = new Intent(this, OneDayActivity.class);
+        intent.putExtra("dayInfo",day);
+        intent.putExtra("dayDate",maper.get(day));
+        startActivity(intent);
+    }
+
 
 
     public class LoadViewsInToWeekView extends AsyncTask<String, Void, String> {

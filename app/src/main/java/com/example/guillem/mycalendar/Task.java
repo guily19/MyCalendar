@@ -9,7 +9,7 @@ public class Task {
     private String descripcio;
     private String dataIni;
     private String dataFi;
-    private Boolean teRelacio;
+    private int teRelacio;
     private String Meeting;
 
 
@@ -37,11 +37,11 @@ public class Task {
         this.dataFi = dataFi;
     }
 
-    public Boolean getTeRelacio() {
+    public int getTeRelacio() {
         return teRelacio;
     }
 
-    public void setTeRelacio(Boolean teRelacio) {
+    public void setTeRelacio(int teRelacio) {
         this.teRelacio = teRelacio;
     }
 

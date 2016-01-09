@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Ajuda"
+            android:background="#baaa17"
+            android:id="@+id/textView11"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Navegació pel calendari"
+            android:background="#DBD9D5"
+            android:id="@+id/textView37"
+            android:gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Canviar la setmana que s'està visualitzant:"
+            android:id="@+id/textView38" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="    - Premer sobre el titol: Setmana del x - y"
+            android:id="@+id/textView39"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Veure calendari en forma de vista de dia:"
+            android:id="@+id/textView40" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="    - Premer sobre el dia que es vol visualitzar"
+            android:id="@+id/textView41"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Afegir una nova reunio"
+            android:background="#51b460"
+            android:id="@+id/textView12"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Per tal de poder afegir una nova reunio s&apos;ha de premer el botó de la cantonada inferior dreta de la pantalla."
+            android:id="@+id/textView13"
+            android:layout_gravity="center_horizontal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Un cop dins de la pantalla de nova reunio s'han d'introduir obligatoriament els següents camps:"
+            android:id="@+id/textView14"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="    - Descripció de la reunio"
+            android:id="@+id/textView55" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="    - Data de la reunio"
+            android:id="@+id/textView15" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="    - Hora d'inici de la reunio"
+            android:id="@+id/textView16" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="    - Hora de finalització de la reunio"
+            android:id="@+id/textView17" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Premer el botó 'Afegir' per tal de que la reunió quedi gurdada al teu calendari"
+            android:id="@+id/textView18"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Afegir una nova reunio"
+            android:background="#ba2d17"
+            android:id="@+id/textView19"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Per tal de poder afegir una nova tasca s&apos;ha de premer el botó de color vermell de la part inferior de la pantalla."
+            android:id="@+id/textView20"
+            android:layout_gravity="center_horizontal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Un cop dins de la pantalla de nova tasca s'han d'introduir obligatoriament els següents camps:"
+            android:id="@+id/textView21"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="    - Descripció de la tasca"
+            android:id="@+id/textView22" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="    - Data d'inici de la tasca"
+            android:id="@+id/textView23" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="En el cas de que la tasca tingui una durada de més d'un dia marcar la caixa corresponent per habilitar el boto d'introdir la data de finalització"
+            android:id="@+id/textView24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="    - Data de finalització de la tasca"
+            android:id="@+id/textView25" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="En el cas de que la tasca tingui relació amb alguna reunio cal marcar la caixa corresponent per habilitar la llista de reunions"
+            android:id="@+id/textView26"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="    - Prem la reunio amb la que te relació la tasca"
+            android:id="@+id/textView27" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Llistar les tasques pendents"
+            android:background="#fae334"
+            android:id="@+id/textView28"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Per tal de poder afegir una nova tasca s&apos;ha de premer el botó de color vermell de la part inferior de la pantalla."
+            android:id="@+id/textView29"
+            android:layout_gravity="center_horizontal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Un cop dins de la pantalla de nova tasca s'han d'introduir obligatoriament els següents camps:"
+            android:id="@+id/textView30" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="    - Descripció de la tasca"
+            android:id="@+id/textView31" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="    - Data d'inici de la tasca"
+            android:id="@+id/textView32" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="En el cas de que la tasca tingui una durada de més d'un dia marcar la caixa corresponent per habilitar el boto d'introdir la data de finalització"
+            android:id="@+id/textView33" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="    - Data de finalització de la tasca"
+            android:id="@+id/textView34" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="En el cas de que la tasca tingui relació amb alguna reunio cal marcar la caixa corresponent per habilitar la llista de reunions"
+            android:id="@+id/textView35"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="    - Prem la reunio amb la que te relació la tasca"
+            android:id="@+id/textView36" />
+
+    </LinearLayout>
+
+
+</ScrollView>

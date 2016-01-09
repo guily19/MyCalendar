@@ -197,7 +197,7 @@ public class NewTask extends Activity {
                             if(meeting.equals("***")){
                                 Toast.makeText(getApplicationContext(), "Prem una reunio de la llista per establir una relació", Toast.LENGTH_LONG).show();
                             } else {
-                                task.setTeRelacio(true);
+                                task.setTeRelacio(1);
                                 task.setMeeting(meeting);
                                 try {
                                     String query = "INSERT INTO Tasks (startDay,endDay, description, isDone, hasMeeting, meetingID) VALUES ('"+task.getDataIni()+"','"+task.getDataFi()+"','"+task.getDescripcio()+"',0,0,'"+task.getMeeting()+"')";
@@ -214,7 +214,7 @@ public class NewTask extends Activity {
                                 }
                             }
                         }else{
-                            task.setTeRelacio(false);
+                            task.setTeRelacio(0);
                             task.setMeeting("-");
                             if(db != null){
 
@@ -224,21 +224,28 @@ public class NewTask extends Activity {
                     }
 
                 } else {
-                    if(db != null){
-                        try {
-                            String query = "INSERT INTO Tasks (startDay, description, isDone, hasMeeting) VALUES ('"+task.getDataIni()+"','"+task.getDescripcio()+"',0,0)";
-                            Log.d(TAG,query);
-                            db.execSQL(query);
-                            db.close();
-                            // Tornem a mostrar la setmana
-                            Intent intent = new Intent(this, MainActivity.class);
-                            startActivity(intent);
-                            Log.d(TAG,"Task added");
-                        } catch (Exception e){
-                            Log.e(TAG,e.toString());
+                    if(cb2.isChecked()){
+                        if(meeting.equals("***")){
+                            Toast.makeText(getApplicationContext(), "Prem una reunio de la llista per establir una relació", Toast.LENGTH_LONG).show();
+                        } else {
+                            task.setTeRelacio(1);
+                            task.setMeeting(meeting);
+                            try {
+                                String query = "INSERT INTO Tasks (startDay,endDay, description, isDone, hasMeeting, meetingID) VALUES ('"+task.getDataIni()+"','"+task.getDataFi()+"','"+task.getDescripcio()+"',0,"+task.getTeRelacio()+",'"+task.getMeeting()+"')";
+                                Log.d(TAG,query);
+                                db.execSQL(query);
+                                db.close();
+                                // Tornem a mostrar la setmana
+                                Toast.makeText(getApplicationContext(), "La tasca s'ha afegit correctament", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(this, MainActivity.class);
+                                startActivity(intent);
+                                Log.d(TAG,"Task added");
+                            } catch (Exception e){
+                                Log.e(TAG,e.toString());
+                            }
                         }
-
                     }
+
                 }
             }
         }
