@@ -19,7 +19,13 @@
         </activity>
         <activity
             android:name=".NewMeeting"
-            android:label="@string/title_activity_new_meeting"></activity>
+            android:label="@string/title_activity_new_meeting" />
+        <activity
+            android:name=".NewTask"
+            android:label="@string/title_activity_new_task" />
+        <activity
+            android:name=".ListTasks"
+            android:label="@string/title_activity_list_tasks"></activity>
     </application>
 
 </manifest>

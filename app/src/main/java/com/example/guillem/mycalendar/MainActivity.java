@@ -167,20 +167,20 @@ public class MainActivity extends Activity {
 
         textViewDate.setText("Setmana del "+firstDayOfWeek+" - "+lastDayOfWeek);
 
-        textViewSun.setText(CommonMethod.convertWeekDays(NextPreWeekday[0])
-                + "\nDg");
-        textViewMon.setText(CommonMethod.convertWeekDays(NextPreWeekday[1])
+        textViewMon.setText(CommonMethod.convertWeekDays(NextPreWeekday[0])
                 + "\nDl");
-        textViewTue.setText(CommonMethod.convertWeekDays(NextPreWeekday[2])
+        textViewTue.setText(CommonMethod.convertWeekDays(NextPreWeekday[1])
                 + "\nDm");
-        textViewWed.setText(CommonMethod.convertWeekDays(NextPreWeekday[3])
+        textViewWed.setText(CommonMethod.convertWeekDays(NextPreWeekday[2])
                 + "\nDc");
-        textViewThu.setText(CommonMethod.convertWeekDays(NextPreWeekday[4])
+        textViewThu.setText(CommonMethod.convertWeekDays(NextPreWeekday[3])
                 + "\nDj");
-        textViewFri.setText(CommonMethod.convertWeekDays(NextPreWeekday[5])
+        textViewFri.setText(CommonMethod.convertWeekDays(NextPreWeekday[4])
                 + "\nDv");
-        textViewSat.setText(CommonMethod.convertWeekDays(NextPreWeekday[6])
+        textViewSat.setText(CommonMethod.convertWeekDays(NextPreWeekday[5])
                 + "\nDs");
+        textViewSun.setText(CommonMethod.convertWeekDays(NextPreWeekday[6])
+                + "\nDg");
 
         try
         {
@@ -199,6 +199,12 @@ public class MainActivity extends Activity {
     public void addNewEvent(View view){
         Log.d(TAG,"Add new event clicked");
         Intent intent = new Intent(this, NewMeeting.class);
+        startActivity(intent);
+    }
+
+    public void addNewTask(View view){
+        Log.d(TAG,"Add new event clicked");
+        Intent intent = new Intent(this, NewTask.class);
         startActivity(intent);
     }
 
@@ -225,20 +231,20 @@ public class MainActivity extends Activity {
 
         textViewDate.setText("Setmana del "+firstDayOfWeek+" - "+lastDayOfWeek);
 
-        textViewSun.setText(CommonMethod.convertWeekDays(NextPreWeekday[0])
-                + "\nDg");
-        textViewMon.setText(CommonMethod.convertWeekDays(NextPreWeekday[1])
+        textViewMon.setText(CommonMethod.convertWeekDays(NextPreWeekday[0])
                 + "\nDl");
-        textViewTue.setText(CommonMethod.convertWeekDays(NextPreWeekday[2])
+        textViewTue.setText(CommonMethod.convertWeekDays(NextPreWeekday[1])
                 + "\nDm");
-        textViewWed.setText(CommonMethod.convertWeekDays(NextPreWeekday[3])
+        textViewWed.setText(CommonMethod.convertWeekDays(NextPreWeekday[2])
                 + "\nDc");
-        textViewThu.setText(CommonMethod.convertWeekDays(NextPreWeekday[4])
+        textViewThu.setText(CommonMethod.convertWeekDays(NextPreWeekday[3])
                 + "\nDj");
-        textViewFri.setText(CommonMethod.convertWeekDays(NextPreWeekday[5])
+        textViewFri.setText(CommonMethod.convertWeekDays(NextPreWeekday[4])
                 + "\nDv");
-        textViewSat.setText(CommonMethod.convertWeekDays(NextPreWeekday[6])
+        textViewSat.setText(CommonMethod.convertWeekDays(NextPreWeekday[5])
                 + "\nDs");
+        textViewSun.setText(CommonMethod.convertWeekDays(NextPreWeekday[6])
+                + "\nDg");
         try
         {
             Log.d(TAG,"Dins el try");
@@ -270,7 +276,7 @@ public class MainActivity extends Activity {
         Calendar now = Calendar.getInstance();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String[] days = new String[7];
-        int delta = -now.get(GregorianCalendar.DAY_OF_WEEK)+1;
+        int delta = -now.get(Calendar.DAY_OF_WEEK)+2;
         now.add(Calendar.DAY_OF_MONTH, delta);
         for (int i = 0; i < 7; i++) {
             days[i] = format.format(now.getTime());
@@ -286,7 +292,7 @@ public class MainActivity extends Activity {
         Calendar now = cal;
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String[] days = new String[7];
-        int delta = -now.get(GregorianCalendar.DAY_OF_WEEK)+1;
+        int delta = -now.get(Calendar.DAY_OF_WEEK)+2;
         now.add(Calendar.DAY_OF_MONTH, delta);
         for (int i = 0; i < 7; i++) {
             days[i] = format.format(now.getTime());
@@ -347,7 +353,7 @@ public class MainActivity extends Activity {
                 RelativeLayout.LayoutParams.FILL_PARENT, higth);
         Button button = new Button(getApplicationContext());
         button.setLayoutParams(params);
-        button.setBackgroundColor(Color.parseColor("#9ACC61"));
+        button.setBackgroundColor(Color.parseColor("#51b460"));
         button.setText(buttonText);
         button.setOnClickListener(buttonOnclckForAllWeekButton);
         button.setTextSize(9);
@@ -418,106 +424,7 @@ public class MainActivity extends Activity {
         String size = "0";
         try {
             time = startTime;
-
-            switch (time) {
-                case 0:
-                    size = "0";
-                    break;
-                case 1:
-                    size = "60";
-
-                    break;
-                case 2:
-                    size = "120";
-
-                    break;
-                case 3:
-                    size = "180";
-
-                    break;
-                case 4:
-                    size = "240";
-
-                    break;
-                case 5:
-                    size = "300";
-
-                    break;
-                case 6:
-                    size = "360";
-
-                    break;
-                case 7:
-                    size = "420";
-
-                    break;
-                case 8:
-                    size = "480";
-
-                    break;
-                case 9:
-                    size = "540";
-
-                    break;
-                case 10:
-                    size = "600";
-
-                    break;
-                case 11:
-                    size = "660";
-
-                    break;
-                case 12:
-                    size = "720";
-
-                    break;
-                case 13:
-                    size = "780";
-
-                    break;
-                case 14:
-                    size = "840";
-
-                    break;
-                case 15:
-                    size = "900";
-
-                    break;
-                case 16:
-                    size = "960";
-
-                    break;
-                case 17:
-                    size = "1020";
-
-                    break;
-                case 18:
-                    size = "1080";
-
-                    break;
-                case 19:
-                    size = "1140";
-
-                    break;
-                case 20:
-                    size = "1200";
-
-                    break;
-                case 21:
-                    size = "1260";
-
-                    break;
-                case 22:
-                    size = "1320";
-
-                    break;
-                case 23:
-                    size = "1380";
-                    break;
-
-                default:
-                    break;
-            }
+            return Integer.toString(time * 80);
 
         } catch (Exception e) {
             Log.getStackTraceString(e);
@@ -532,7 +439,8 @@ public class MainActivity extends Activity {
         try {
             int subHigth = endTime - startTime;
 
-            hight = String.valueOf(subHigth * 60);
+            hight = String.valueOf(subHigth * 80);
+            Log.d(TAG,"hight ->"+hight);
 
         } catch (Exception e) {
             Log.getStackTraceString(e);
@@ -540,6 +448,12 @@ public class MainActivity extends Activity {
 
         return hight;
 
+    }
+
+    public void showTasks(View view) {
+        Log.d(TAG,"Add new event clicked");
+        Intent intent = new Intent(this, ListTasks.class);
+        startActivity(intent);
     }
 
 
@@ -550,6 +464,7 @@ public class MainActivity extends Activity {
             try {
                 //Fem les crides necessaries a la BD (una per dia)
                 Log.d(TAG,"Anem a fer les queries pertinents per la setmana");
+                int dayPosition = 0;
                 weekDatas = new ArrayList<WeekSets>();
                 for(int i = 0; i < NextPreWeekday.length; ++i){
                     String formatedData = formatData(NextPreWeekday[i]);
@@ -559,11 +474,13 @@ public class MainActivity extends Activity {
                         do {
                             int hIni = c.getInt(c.getColumnIndexOrThrow("startTime"));
                             int hEnd = c.getInt(c.getColumnIndexOrThrow("endTime"));
+                            double hIni2 = hIni * 1.5;
                             Log.d(TAG,"hIni = "+Integer.toString(hIni));
                             Log.d(TAG,"hEnd = "+Integer.toString(hEnd));
                             String description = c.getString(c.getColumnIndexOrThrow("description"));
                             tapMargin = getWithAndHigthToButton(hIni);
                             buttonHight = getHightOfButton(hIni, hEnd);
+                            dayPosition = (i != 0 ) ? i -1 : i + 6;
                             weekDatas.add(getWeekValues(String.valueOf(i),"12",description,tapMargin,buttonHight));
                         } while (c.moveToNext());
                     }

@@ -13,7 +13,7 @@ public class CommonMethod {
         String formattedDate = null;
         try {
             SimpleDateFormat originalFormat = new SimpleDateFormat(
-                    "yyyy-MM-dd", Locale.ENGLISH);
+                    "yyyy-MM-dd", Locale.FRANCE);
             SimpleDateFormat targetFormat = new SimpleDateFormat("dd");
             Date date12 = originalFormat.parse(date);
             formattedDate = targetFormat.format(date12);

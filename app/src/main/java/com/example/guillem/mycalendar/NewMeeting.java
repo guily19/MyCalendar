@@ -24,7 +24,6 @@ public class NewMeeting extends Activity {
     private static final String TAG = "NewMeeting";
     private CalendarDbHelper cdbh = new CalendarDbHelper(this,"MeetingsDB",null,1);
     private SQLiteDatabase db;
-    private DatePicker datePicker;
     private NumberPicker hourPickerIni, hourPickerEnd;
     private EditText descEditText;
     private Calendar calendar;
@@ -61,8 +60,8 @@ public class NewMeeting extends Activity {
         hourPickerIni.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                timeIniView.setText("Hora d'Inici : "+Integer.toString(newVal)+":00");
-                hourPickerEnd.setMinValue(newVal+1);
+                timeIniView.setText("Hora d'inici : "+Integer.toString(newVal)+":00");
+                hourPickerEnd.setMinValue(newVal);
                 hourPickerEnd.setMaxValue(24);
                 hourIni = newVal;
             }
@@ -123,6 +122,7 @@ public class NewMeeting extends Activity {
             String hEnd = timeEndView.getText().toString();
             if(db != null){
                 try {
+                    //String query = "INSERT INTO Meetings(day,startTime,endTime,description) VALUES ('"+date+"','"+hIni+"','"+hEnd+"','"+desc+"')";
                     String query = "INSERT INTO Meetings(day,startTime,endTime,description) VALUES ('"+date+"','"+hourIni+"','"+hourEnd+"','"+desc+"')";
                     Log.d(TAG,query);
                     db.execSQL(query);
@@ -138,6 +138,7 @@ public class NewMeeting extends Activity {
             }
         } else {
             //Falta omplir la descripcio del meeting
+            Toast.makeText(getApplicationContext(), "Falta omplir la descripció de la reunió", Toast.LENGTH_LONG).show();
         }
 
     }

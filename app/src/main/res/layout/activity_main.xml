@@ -76,15 +76,6 @@
                 android:layout_weight="0.3"
                 android:text="  " />
 
-            <TextView
-                android:id="@+id/textViewSun"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.3"
-                android:gravity="center"
-                android:text="Du"
-                android:textColor="#000" />
-
 
             <TextView
                 android:id="@+id/textViewMon"
@@ -138,6 +129,15 @@
                 android:layout_weight="0.3"
                 android:gravity="center"
                 android:text="Ds"
+                android:textColor="#000" />
+
+            <TextView
+                android:id="@+id/textViewSun"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:gravity="center"
+                android:text="Du"
                 android:textColor="#000" />
 
         </LinearLayout>
@@ -937,8 +937,31 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Veure Tasques"
+            android:text="Veure tasques pendents"
+            android:onClick="showTasks"
             android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/addButton3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/round_button3"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="\?"
+            android:textColor="#fff"
+            android:onClick="openHelp"
+            android:layout_gravity="right" />
+
+        <Button
+            android:id="@+id/addButton2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/roun_button2"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="T"
+            android:textColor="#fff"
+            android:onClick="addNewTask"
+            android:layout_gravity="right" />
 
         <Button
             android:id="@+id/addButton"
@@ -946,7 +969,7 @@
             android:layout_height="50dp"
             android:background="@drawable/round_button"
             android:gravity="center_vertical|center_horizontal"
-            android:text="+"
+            android:text="R"
             android:textColor="#fff"
             android:onClick="addNewEvent"
             android:layout_gravity="right" />

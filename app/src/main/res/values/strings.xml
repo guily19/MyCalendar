@@ -7,4 +7,6 @@
     <string name="date_button_set">Set Date</string>
     <string name="date_view_set">The Date is: </string>
     <string name="date_selected"></string>
+    <string name="title_activity_new_task">NewTask</string>
+    <string name="title_activity_list_tasks">ListTasks</string>
 </resources>

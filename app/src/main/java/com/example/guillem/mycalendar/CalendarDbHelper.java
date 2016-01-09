@@ -9,8 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class CalendarDbHelper extends SQLiteOpenHelper {
 
-        String sqlCreateMeetings = "CREATE TABLE Meetings(day TEXT, startTime INTEGER, endTime INTEGER, description TEXT)";
-    String sqlCreateTasks = "CREATE TABLE Tasks(day TEXT, description TEXT, hasMeeting INTEGER, meetingID TEXT)";
+    String sqlCreateMeetings = "CREATE TABLE Meetings(day TEXT, startTime INTEGER, endTime INTEGER, description TEXT)";
+    String sqlCreateTasks = "CREATE TABLE Tasks(startDay TEXT, endDay TEXT, description TEXT, isDone INTEGER, hasMeeting INTEGER, meetingID TEXT)";
     String deleteMeetingsTable = "DROP TABLE IF EXISTS Meetings";
     String deleteTasksTable = "DROP TABLE IF EXISTS Tasks";
 
